@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Manager — view, add, edit, and delete your contacts.">
+  <title>Contact Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="css.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="Index.js"></script>
+  <script>
+    window.onload = function () {
+      readCookie();
+      Welcome();
+      document.getElementById("searchText").value = " ";
+      searchContact();
+      document.getElementById("Message").innerHTML = "";
+      document.getElementById("searchText").value = "";
+    };
+  </script>
+
+  <style>
+    /* ── Real logo in topbar ── */
+    .topbar-logo-img {
+      height: 36px;
+      width: auto;
+    }
+
+    /* ── Lucide icon buttons inside table ── */
+    .icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      transition: background 0.15s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+    }
+    .icon-btn:hover { background: rgba(255,255,255,0.1); }
+    .icon-btn svg {
+      width: 18px;       /* ← change this to resize icons */
+      height: 18px;      /* ← keep equal to width */
+      stroke: currentColor;
+      transition: color 0.15s;
+    }
+    .icon-btn:first-child:hover { color: var(--accent); }   /* edit = blue  */
+    .icon-btn:last-child:hover  { color: var(--danger); }   /* delete = red */
+    .icon-btn-danger:hover      { color: var(--danger) !important; }
+
+    /* ── Form view card ── */
+    #formView {
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      animation: fadeDown 0.25s ease both;
+    }
+    #formView h2 { margin-bottom: 20px; }
+
+    /* ── Status messages ── */
+    #Message { color: var(--success); font-size: 0.875rem; min-height: 1.2em; }
+    #Error   { color: var(--danger);  font-size: 0.875rem; min-height: 1.2em; }
+    #contactAddResult { color: var(--accent); font-size: 0.875rem; margin-top: 12px; min-height: 1.2em; }
+    #searchResult { font-size: 0.8rem; color: var(--text-muted); }
+
+    /* ── Add Contact toggle button ── */
+    #toggleBtn {
+      white-space: nowrap;
+    }
+
+    /* ── Placeholder when table is empty ── */
+    .empty-state {
+      text-align: center;
+      padding: 56px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state .icon { font-size: 2.8rem; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- ── TOP BAR ── -->
+    <header class="topbar" role="banner">
+      <div class="topbar-left">
+        <div class="topbar-logo-icon" aria-hidden="true">📇</div>
+        <span class="topbar-app-name">ContactManager</span>
+      </div>
+      <div class="topbar-right">
+        <span class="topbar-greeting">Hello, <strong id="User">—</strong></span>
+        <button class="btn btn-secondary btn-sm"
+                onclick="Logout()"
+                aria-label="Sign out of your account">
+          Sign Out
+        </button>
+      </div>
+    </header>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="main-content">
+
+      <!-- Status / error banners -->
+      <p id="Message" role="status"  aria-live="polite"></p>
+      <p id="Error"   role="alert"   aria-live="assertive"></p>
+
+      <!-- ── ADD / EDIT CONTACT FORM (hidden by default, swaps with table) ── -->
+      <div id="formView" class="glass-card" style="display:none;">
+        <h2>Add / Edit Contact</h2>
+
+        <div class="form-inline">
+          <div class="form-group">
+            <label for="newName">Full Name</label>
+            <input type="text"
+                   id="newName"
+                   placeholder="Jane Doe"
+                   autocomplete="off"
+                   aria-label="Contact name">
+          </div>
+          <div class="form-group">
+            <label for="newPhone">Phone Number</label>
+            <input type="tel"
+                   id="newPhone"
+                   placeholder="555-123-4567"
+                   minlength="10" maxlength="10"
+                   autocomplete="off"
+                   aria-label="Contact phone number">
+          </div>
+          <div class="form-group">
+            <label for="newMail">Email Address</label>
+            <input type="email"
+                   id="newMail"
+                   placeholder="jane@example.com"
+                   autocomplete="off"
+                   aria-label="Contact email address">
+          </div>
+        </div>
+
+        <div class="form-inline-actions">
+          <button class="btn btn-primary"
+                  onclick="addContact()"
+                  aria-label="Create new contact">
+            Create
+          </button>
+          <button class="btn btn-ghost"
+                  onclick="updateContact()"
+                  aria-label="Save edits to contact">
+            Save Edit
+          </button>
+          <button class="btn btn-secondary"
+                  onclick="Cancel()"
+                  aria-label="Cancel and return to contacts list">
+            Cancel
+          </button>
+        </div>
+
+        <p id="contactAddResult" role="alert" aria-live="polite"></p>
+      </div>
+
+      <!-- ── CONTACTS TABLE ── -->
+      <div id="tableDiv">
+
+        <!-- Table header row: search + add button -->
+        <div class="section-header">
+          <h2>My Contacts</h2>
+          <div class="search-bar" role="search">
+            <label for="searchText" class="sr-only">Search contacts</label>
+            <input type="search"
+                   id="searchText"
+                   placeholder="Search contacts…"
+                   aria-label="Search contacts"
+                   onkeydown="if(event.key==='Enter') searchContact()">
+            <button class="btn btn-secondary btn-sm"
+                    onclick="searchContact()"
+                    aria-label="Search">
+              Search
+            </button>
+            <button class="btn btn-primary btn-sm"
+                    id="toggleBtn"
+                    onclick="toggleView()"
+                    aria-label="Add a new contact">
+              + Add Contact
+            </button>
+          </div>
+        </div>
+
+        <!-- Status line (e.g. "No results") -->
+        <p id="searchResult" style="padding: 0 4px 8px;"></p>
+
+        <!-- The table itself -->
+        <div style="overflow-x:auto; border-radius: var(--radius); border: 1px solid var(--glass-border);">
+          <table id="contactTable" aria-label="Contacts list">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Email</th>
+                <th scope="col" style="width:90px; text-align:center;">Edit</th>
+                <th scope="col" style="width:90px; text-align:center;">Delete</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <!-- Populated by searchContact() in Index.js -->
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /#tableDiv -->
+
+    </main>
+  </div>
+
+  <!-- Screen-reader only utility class -->
+  <style>
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+  </style>
+</body>
+</html>

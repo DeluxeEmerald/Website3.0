@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create a free Contact Manager account to store and search your contacts.">
+  <title>Contact Manager — Sign Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="css.css">
+  <script src="Index.js" defer></script>
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card glass-card" role="main">
+
+      <div class="auth-logo" aria-hidden="true">
+        <div class="auth-logo-icon">📇</div>
+        <span class="auth-logo-text">ContactManager</span>
+      </div>
+
+      <h1 class="auth-title">Create account</h1>
+      <p class="auth-subtitle required-note">Fields marked <span aria-hidden="true">*</span><span class="sr-only">required</span> are required</p>
+
+      <form onsubmit="event.preventDefault(); register();" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fName">First Name <span aria-hidden="true" style="color:var(--gold)">*</span></label>
+            <input type="text" id="fName" name="fName"
+                   placeholder="Jane"
+                   autocomplete="given-name"
+                   aria-required="true" required>
+          </div>
+          <div class="form-group">
+            <label for="lName">Last Name <span aria-hidden="true" style="color:var(--gold)">*</span></label>
+            <input type="text" id="lName" name="lName"
+                   placeholder="Doe"
+                   autocomplete="family-name"
+                   aria-required="true" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="Username">Username <span aria-hidden="true" style="color:var(--gold)">*</span></label>
+          <input type="text" id="Username" name="username"
+                 placeholder="Choose a username"
+                 autocomplete="username"
+                 aria-required="true" required>
+        </div>
+
+        <div class="form-group">
+          <label for="Password">Password <span aria-hidden="true" style="color:var(--gold)">*</span></label>
+          <input type="password" id="Password" name="password"
+                 placeholder="Create a password"
+                 autocomplete="new-password"
+                 aria-required="true" required>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:8px;">
+          <button type="button" class="btn btn-secondary" onclick="Cancel()">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+        </div>
+      </form>
+
+      <p class="status-msg" id="loginResult" role="alert" aria-live="polite"></p>
+      <p class="status-msg" id="createResult" role="alert" aria-live="polite"></p>
+
+      <div class="auth-footer">
+        <p>Already have an account? <a href="index.html">Sign in</a></p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

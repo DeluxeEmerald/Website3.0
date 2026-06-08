@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+		<title>Contact Manager</title>
+		<link rel="stylesheet" href="./css.css">
+		<script src="./Index.js">
+		</script>
+	</head>
+
+	<body>
+		<div id="LoginPage">'
+            <h1>Please Register</h>
+            <div>
+			    <p><span id="Required">Marked*</span> fields are required</p>
+		    </div>
+			<div class="signUpContainer">
+				<div class="fName">
+					<label>First Name*</label>
+				</div>
+				<div class="fNamefield">
+					<input type="text" id="fName" required="">
+				</div>
+				<div class="lName">
+					<label>Last Name*</label>
+				</div>
+				<div class="lNamefield">
+					<input type="text" id="lName" required="">
+				</div>
+                <div class="user">
+					<label>Username*</label>
+				</div>
+				<div class="userfield">
+					<input type="text" id="Username" required="">
+				</div>
+				<div class="pwrd">
+					<label>Password*</label>
+				</div>
+				<div class="pwrdfield">
+					<input type="text" id="Password" required="">
+				</div>
+				<div class="error">
+					<p id="loginResult" class="footer"></p>
+				</div>
+                <div class="buttons">
+					<button onclick="loginReturn()" id="Cancel">Cancel</button>
+
+					<button onclick="register()" id="Login">Create Account</button>
+				</div>
+				<div>
+					<p class="error" id="createResult"></p>
+				</div>
+			</div>
+		</div>
+		
+    </body>
+</html>

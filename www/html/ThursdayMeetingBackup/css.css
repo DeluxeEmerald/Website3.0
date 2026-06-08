@@ -1,0 +1,223 @@
+body{
+    background-image: url('sea.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+label{
+    color: #fbd12b;
+    margin: 10px;
+}
+
+#Required {
+    color: #fbd12b;
+}
+
+#Password{
+    margin-left: 10px;
+}
+
+p, label{
+    font-size: 30px;
+}
+
+img{
+    width: 25px;
+    height: 25px;
+}
+
+#Username, #Password, #fName, #lName{
+    font-size: 20px;
+	font-weight: bold;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+#LoginPage { 
+    width: 650px; 
+    margin: 50px auto; 
+    padding: 40px 20px;
+	font-weight: bold;
+    background-color: #64bbff87; 
+    border: 2px solid #2b35fb;  
+    border-radius: 40px; 
+    text-align: center; 
+} 
+
+#Login {
+    margin-top: 30px;
+    width: 190px;
+    height: 70px;
+    font-size: 20px;
+    background-color: #ffffff;
+    color: #000cff;
+    border: 5 px solid #2b35fb;  
+    border-radius: 40px; 
+}
+
+
+#Login:hover {
+    background-color: #fbd12b;
+    cursor: pointer;
+}
+
+#Cancel {
+    margin-top: 30px;
+    width: 190px;
+    height: 70px;
+    font-size: 20px;
+    background-color: #fbd12b;
+    color: #2b35fb;  
+    border-radius: 40px; 
+}
+
+#Cancel:hover{
+    background-color: white;
+}
+
+#passBox {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    justify-content: center;
+}
+
+#showpass {
+    width: 300px;
+}
+
+#showdiv {
+    display: flex;
+    padding: 0px;
+    justify-content: center;
+}
+
+.mainPageContainer
+{
+	display: grid;
+	grid-template-areas:
+       "fName fNamefield"
+     "lName lNamefield"
+	 "user userfield"
+	 "pwrd pwrdfield"
+	 "showpwrd showpwrd"
+	 "login login"
+	 "error error";
+	/* padding: 10px; */
+}
+
+.mainPageContainer div
+{
+	padding: 10px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.mainPageContainer div.fName {
+	grid-area: fName;
+	text-align: right;  
+}
+
+.mainPageContainer div.fNamefield {
+	grid-area: userfield;
+	text-align: left;  
+}
+
+.mainPageContainer div.lName {
+	grid-area: lName;
+	text-align: right;  
+}
+
+.mainPageContainer div.lNamefield {
+	grid-area: lNamefield;
+	text-align: left;  
+}
+
+.mainPageContainer div.user {
+	grid-area: user;
+	text-align: right;  
+}
+
+.mainPageContainer div.userfield {
+	grid-area: userfield;
+	text-align: left;  
+}
+
+.mainPageContainer div.pwrd {
+	grid-area: pwrd;
+	text-align: right;  
+}
+
+.mainPageContainer div.pwrdfield {
+	grid-area: pwrdfield;
+	text-align: left;  
+	padding-left: 0px;
+}
+
+.mainPageContainer div.empty {
+	grid-area: empty;
+	text-align: center;  
+}
+
+.mainPageContainer div.showpwrd {
+	grid-area: showpwrd;
+	text-align: center;  
+	padding-top: 0px;
+}
+
+.mainPageContainer div.login {
+	grid-area: login;
+	text-align: center;  
+}
+
+.mainPageContainer div.error {
+	grid-area: error;
+	text-align: center;  
+}
+
+#showPwrdText {
+	font-size: 25px;
+}
+
+table{
+    border-radius: 10px;
+    border-color: black;
+    width: 100%;
+}
+
+th, td{
+    min-width: 150px;
+    max-width: 250px;
+}
+
+td{
+    text-align: center;
+}
+
+td.pic{
+    width: 25px;
+}
+
+.bubble {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f3f6;
+    border: 2px solid #007bff;
+    border-radius: 10px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin: 10px;
+}
+
+.bubble td {
+    border: none;
+    flex: 1;
+    padding: 5px;
+}
+
+.Search{
+    margin: 20px;
+}

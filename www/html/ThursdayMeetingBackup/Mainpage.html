@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<title>Contact Manager</title>
+		<link rel="stylesheet" href="css.css">
+		<script src="Index.js">
+		</script>
+		<script>
+			window.onload = function(){
+				readCookie();
+				Welcome();
+				document.getElementById("searchText").value = " ";
+				searchContact();
+				document.getElementById("Message").innerHTML = "";
+				document.getElementById("searchText").value = "";
+			};
+		</script>
+	</head>
+
+	<body>
+
+		<div id="Welcome">
+			<h1>Wecome to paradise <p id="User">Name</p></h1>
+			<p id="Message"></p>
+			<p id="Error"></p>
+			<div class="Search">
+				<input type="text" id="searchText">
+				<button onclick="searchContact()">Search</button>
+				<button onclick="Logout()">Logout</button>
+			</div>
+			<button onclick="toggleView()">Toggle Add</button>
+			<div id="tableDiv">
+				<table id="contactTable">
+					<thead>
+						<tr class="bubble">
+							<th>Name</th>
+							<th>Phone Number</th>
+							<th>Email</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody id="tableBody">
+						<!--javascript goes here-->
+					</tbody>
+				</table>
+			</div>
+			<!--Add Contact View-->
+			<div id="formView" style="display:none;">
+				<input type="text" id="newName" placeholder="Name" required>
+				<input id="newPhone" type="text" minlength="10" maxlength="10" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  required>
+				<input type="text" id="newMail" placeholder="Email" required>
+				<button onclick="addContact()">Create</button>
+				<button onclick="updateContact()">Edit</button>
+				<button onclick="Cancel()">Cancel</button>
+				<p id="contactAddResult"></p>
+			</div>
+		</div>
+	</body>	
+</html>

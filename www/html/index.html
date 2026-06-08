@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sign in to Contact Manager — store and search your contacts.">
+  <title>Contact Manager — Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="css.css">
+  <script src="Index.js" defer></script>
+  <script>
+    function showPwrd() {
+      var x = document.getElementById("Password");
+      var checked = document.getElementById("showPwrdCheck").checked;
+      x.type = checked ? "text" : "password";
+    }
+  </script>
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-card glass-card" role="main">
+
+      <div class="auth-logo" aria-hidden="true">
+        <img src="logoTR.png" alt="ContactManager" class="auth-logo-img">
+      </div>
+
+      <p class="auth-subtitle">Sign in to manage your contacts</p>
+
+      <form onsubmit="event.preventDefault(); Login();" novalidate>
+        <div class="form-group">
+          <label for="Username">Username</label>
+          <input type="text" id="Username" name="username"
+                 placeholder="Enter your username"
+                 autocomplete="username"
+                 aria-required="true" required>
+        </div>
+
+        <div class="form-group">
+          <label for="Password">Password</label>
+          <input type="password" id="Password" name="password"
+                 placeholder="Enter your password"
+                 autocomplete="current-password"
+                 aria-required="true" required>
+        </div>
+
+        <div class="show-pass-row">
+          <input type="checkbox" id="showPwrdCheck" onchange="showPwrd()" aria-label="Show password">
+          <label for="showPwrdCheck">Show password</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+      </form>
+
+      <p class="status-msg" id="loginResult" role="alert" aria-live="polite"></p>
+
+      <div class="auth-footer">
+        <p>Don't have an account? <a href="signup.html">Create one</a></p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
