@@ -2,7 +2,7 @@
 
 > A full-stack contact management web application built with the **LAMP stack** for COP4331 — POOSD at the University of Central Florida.
 
-![One Contact Manager](logoTR.png)
+![One Contact Manager](www/html/logo.png)
 
 ---
 
@@ -133,34 +133,6 @@ Response: { "error": "" }
 - A LAMP server (Linux, Apache, MySQL, PHP 8+)
 - A web browser
 
-### Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/one-contact-manager.git
-   cd one-contact-manager
-   ```
-
-2. **Deploy frontend files** to your Apache web root
-   ```bash
-   cp -r * /var/www/html/
-   ```
-
-3. **Deploy PHP backend** files to your server's API directory
-   ```bash
-   cp -r LAMPAPI/ /var/www/html/LAMPAPI/
-   ```
-
-4. **Set up the MySQL database** — create a database and a `users` and `contacts` table. Update your PHP files with the correct DB credentials.
-
-5. **Update the API base URL** in `Index.js` if hosting on a different server:
-   ```js
-   const urlBase = "http://your-server.com/LAMPAPI";
-   ```
-
-6. Open `index.html` in a browser to get started.
-
----
 
 ## Usage
 
