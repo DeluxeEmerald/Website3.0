@@ -154,9 +154,9 @@ Built for **COP4331 — Processes of Object-Oriented Software** at the **Univers
 | Name | Role |
 |---|---|
 | Ian Hynes | Developer |
-| Jaime X | Front End |
-| Noah X | Front End |
-| Ryan API | API |
+| Jaime Toro Caraballo | Front End |
+| Noah Nugent | Front End |
+| Ryan Acevedo | API |
 | Ryan DeMaria | Admiral General |
 ---
 
